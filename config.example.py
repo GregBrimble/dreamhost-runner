@@ -4,6 +4,6 @@ MODULE = "app"
 PACKAGE = "boilerplate_web_service"
 INSTANCE = "app"
 
-# from PACKAGE.MODULE import INSTANCE_NAME
+# from PACKAGE.MODULE import INSTANCE
 # package/module.py
-# INSTANCE_NAME = Flask(__name__)
+# INSTANCE = Flask(__name__)

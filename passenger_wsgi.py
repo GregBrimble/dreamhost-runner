@@ -1,9 +1,8 @@
 from importlib import import_module
 import logging
-import os
+from os import execl, getcwd
+from os.path import relpath
 from sys import argv, executable, exit, path
-
-logging.basicConfig(level=logging.DEBUG)
 
 try:
     from config import INSTANCE, INTERPRETER, MODULE, PACKAGE
@@ -14,10 +13,10 @@ try:
     path.append(PACKAGE)
     application = getattr(import_module(MODULE), INSTANCE)
 except ImportError:
-    if os.path.relpath(executable, os.getcwd()) != INTERPRETER:
+    if relpath(executable, getcwd()) != INTERPRETER:
         try:
             logging.info("Switching interpreter to `%s`..." % INTERPRETER)
-            os.execl(INTERPRETER, INTERPRETER, *argv)
+            execl(INTERPRETER, INTERPRETER, *argv)
         except OSError:
             exit("Virtual environment `%s` could not be found." % INTERPRETER)
     else:
